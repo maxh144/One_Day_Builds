@@ -1,0 +1,57 @@
+body {
+    font: 20px Raleway, sans-serif;
+    line-height: 2;
+    color: #0505A0;
+    font-weight: 500;
+    background-color: #1B1B1E;
+  }
+
+p {font-size: 16px;}
+
+.flex-c{
+
+
+  display:  flex;
+  flex-direction: column;
+
+}
+
+.flex-h{
+
+
+  display:  flex;
+  flex-direction: row;
+  justify-content: center;
+
+
+}
+
+.flex-h > button {
+  background-color: #a1a1ff;
+  width: 200px;
+  margin: 10px 50px 10px 50px;
+  text-align: center;
+  line-height: 75px;
+  font-size: 50px;
+  border-radius: 25px;
+}
+
+.stream{
+
+  width: 300%;
+  margin: 0px;
+  margin-left:  10px;
+
+
+}
+
+.button{
+
+
+    background-color: #115160;
+    color: #D8DBE2;
+    border-radius: 15px;
+    padding: 25px;
+    margin:  auto;
+
+}

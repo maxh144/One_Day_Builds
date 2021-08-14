@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Stepper Driver </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
+  <link href="./style.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+  <div class="flex-h" style="margin-top: 50px">
+    <button id="left">Left</button>
+    <button id="center">Click</button>
+    <button id="right">Right</button>
+  </div>
+
+
+<script>
+
+  var firebaseConfig = {
+    apiKey: "AIzaSyCnwRdC_ILcqRrLSSX2N-MyfUFbw72PDbw",
+    authDomain: "printer-monitor.firebaseapp.com",
+    databaseURL: "https://printer-monitor-default-rtdb.firebaseio.com",
+    projectId: "printer-monitor",
+    storageBucket: "printer-monitor.appspot.com",
+    messagingSenderId: "80966596605",
+    appId: "1:80966596605:web:68eeb6cfbd52e1b42f4b94"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  var ref = firebase.database().ref("/");
+  var time;
+  var moveVal;
+
+  firebase.database().ref('/move').on('value', (snapshot) => {
+    moveVal  = snapshot.val();
+  });
+
+  function mouseDown(){
+    time = Date.now();
+  }
+
+  function mouseUp(type){
+    if(moveVal == 0){
+
+      var interval = Date.now() - time; 
+
+      if(type == 'l'){
+        interval *= -1;
+      }
+
+      ref.update({
+        "move": interval
+      });
+    }
+  }
+  function click(){
+    ref.update({
+      "click": true
+    });
+  }
+  
+  document.getElementById('left').addEventListener('mousedown', mouseDown);
+  document.getElementById('left').addEventListener('mouseup', function(){mouseUp('l');});
+
+  document.getElementById('right').addEventListener('mousedown', mouseDown);
+  document.getElementById('right').addEventListener('mouseup', function(){mouseUp('r');});
+
+  document.getElementById('center').addEventListener('click', click);
+
+
+</script>
+
+</body>
+</html>
